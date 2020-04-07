@@ -1,0 +1,72 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0px;
+  text-align: center;
+}
+h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.5rem;
+}
+p {
+  line-height: 2;
+}
+hr {
+  border-style: dotted none none;
+  border-width: 5px;
+  border-color: #eeeeee;
+  width: 5%;
+}
+.top-container {
+  background-color: #303841;
+  color: #eeeeee;
+  position: relative;
+}
+.profile-container {
+  background-color: #3a4750;
+  color: #eeeeee;
+  position: relative;
+}
+.experience-container {
+  background-color: #eeeeee;
+  color: #3a4750;
+  position: relative;
+}
+.bottom-container {
+  background-color: #eeeeee;
+  padding: 40px;
+  font-size: 0.75rem;
+  color: #3a4750;
+}
+.nameplate-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.top-img {
+  width: 100%;
+}
+.top-nameplate {
+  border-bottom: 1px solid #eeeeee;
+  font-size: 5.265rem;
+  font-weight: 900;
+  margin: 0 auto 20px auto;
+  padding-bottom: 20px;
+}
+.top-header {
+  font-weight: normal;
+  font-size: 1.75rem;
+}
+.profile-pic {
+  margin: 100px auto 0;
+}
+.footer-link {
+  color: #3a4750;
+  font-size: 1.25rem;
+  padding: 20px;
+  text-decoration: none;
+}
+.footer-link:hover {
+  color: #d72323;
+  font-weight: bold;
+}
