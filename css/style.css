@@ -59,11 +59,17 @@ hr {
   .top-nameplate {
     font-size: 5.265rem;
   }
+  .top-header {
+    font-size: 1.75rem;
+  }
 }
 /* If the screen size is small:*/
 @media screen and (max-width: 600px) {
   .top-nameplate {
     font-size: 2rem;
+  }
+  .top-header {
+    font-size: 1rem;
   }
 }
 .top-nameplate {
@@ -74,7 +80,6 @@ hr {
 }
 .top-header {
   font-weight: normal;
-  font-size: 1.75rem;
 }
 .profile-pic {
   margin: 100px auto 0;
