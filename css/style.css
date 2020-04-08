@@ -1,3 +1,4 @@
+/******** ELEMENT SELECTORS ********/
 body {
   font-family: "Open Sans", sans-serif;
   margin: 0px;
@@ -21,7 +22,17 @@ hr {
   border-color: #eeeeee;
   width: 5%;
 }
+a {
+  text-decoration: none;
+}
+a:hover {
+  color: #d72323;
+  font-weight: bold;
+}
+/******** CLASS SELECTORS ********/
+/** CONTAINERS **/
 .top-container {
+  background-attachment: fixed;
   background-color: #303841;
   background-image:url(../images/McLaren.png);
   background-position:50% 50%;
@@ -47,11 +58,16 @@ hr {
   color: #eeeeee;
   position: relative;
 }
-.bottom-container {
+.interests-container {
   background-color: #eeeeee;
+  color: #3a4750;
+  position: relative;
+}
+.footer-container {
+  background-color: #3a4750;
   padding: 0 0 40px;
   font-size: 0.75rem;
-  color: #3a4750;
+  color: #eeeeee;
 }
 .nameplate-container {
   position: absolute;
@@ -70,6 +86,12 @@ hr {
   .top-container {
     height: 600px;
   }
+  .icon-container-odd {
+    float: left;
+  }
+  .icon-container-even {
+    float: right;
+  }
 }
 /* If the screen size is small:*/
 @media screen and (max-width: 600px) {
@@ -81,6 +103,12 @@ hr {
   }
   .top-header {
     font-size: 1rem;
+  }
+  .icon-container-odd {
+    margin: auto;
+  }
+  .icon-container-even {
+    margin: auto;
   }
 }
 .top-nameplate {
@@ -96,37 +124,37 @@ hr {
 .profile-pic {
   margin: 100px auto 0;
 }
+/** ROWS **/
 .row {
   margin: 50px auto 0;
-  max-width: 800px;
+  max-width: 700px;
   padding-bottom: 50px;
 }
 .icon-container-odd {
-  margin: 20px;
-  float: left;
+  min-width: 240px;
+  width: 25%;
 }
 .icon-container-even {
-  margin: 20px;
-  float: right;
+  min-width: 240px;
+  width: 25%;
 }
 .icon {
   border-radius: 25%;
+  margin: 20px;
   width: 200px;
 }
-.details {
+.details-container {
   display: inline-block;
-  max-width: 400px;
+  max-width: 420px;
+  padding: 0 20px;
   text-align: left;
+  width: 75%;
 }
+/** FOOTER **/
 .footer-link {
-  color: #3a4750;
+  color: #eeeeee;
   font-size: 1.25rem;
   padding: 20px;
-  text-decoration: none;
-}
-.footer-link:hover {
-  color: #d72323;
-  font-weight: bold;
 }
 .footer-text {
   font-size: 1rem;
