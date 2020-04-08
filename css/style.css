@@ -34,9 +34,9 @@ a:hover {
 .top-container {
   background-attachment: fixed;
   background-color: #303841;
-  background-image:url(../images/McLaren.png);
-  background-position:50% 50%;
+  background-image:url(../images/McLarenGrey.png);
   background-size:cover;
+  background-repeat: no-repeat;
   overflow:hidden;
   color: #eeeeee;
   position: relative;
@@ -77,6 +77,10 @@ a:hover {
 }
 /* If the screen size is large:*/
 @media screen and (min-width: 601px) {
+  .top-container {
+    background-position:center;
+    background-size:cover;
+  }
   .top-nameplate {
     font-size: 5.265rem;
   }
@@ -95,6 +99,10 @@ a:hover {
 }
 /* If the screen size is small:*/
 @media screen and (max-width: 600px) {
+  .top-container {
+    background-position:50% 0;
+    background-size:800px;
+  }
   .top-container {
     height: 300px;
   }
