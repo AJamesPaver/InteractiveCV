@@ -40,7 +40,7 @@ a:hover {
   overflow:hidden;
   color: #eeeeee;
   position: relative;
-  height: 100vh;
+  height: 600px;
 }
 .profile-container {
   background-color: #3a4750;
@@ -87,6 +87,9 @@ a:hover {
   .top-header {
     font-size: 1.75rem;
   }
+  .top-container {
+    height: 600px;
+  }
   .icon-container-odd {
     float: left;
   }
@@ -99,6 +102,9 @@ a:hover {
   .top-container {
     background-position:50% 0;
     background-size:800px;
+  }
+  .top-container {
+    height: 300px;
   }
   .top-nameplate {
     font-size: 2rem;
