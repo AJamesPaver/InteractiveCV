@@ -35,12 +35,13 @@ a:hover {
   background-attachment: fixed;
   background-color: #303841;
   background-image:url(../images/McLarenGrey.png);
+  background-position:50% 0;
   background-size:cover;
   background-repeat: no-repeat;
   overflow:hidden;
   color: #eeeeee;
   position: relative;
-  height: 600px;
+  height: 100vh;
 }
 .profile-container {
   background-color: #3a4750;
@@ -77,18 +78,11 @@ a:hover {
 }
 /* If the screen size is large:*/
 @media screen and (min-width: 601px) {
-  .top-container {
-    background-position:center;
-    background-size:cover;
-  }
   .top-nameplate {
     font-size: 5.265rem;
   }
   .top-header {
     font-size: 1.75rem;
-  }
-  .top-container {
-    height: 600px;
   }
   .icon-container-odd {
     float: left;
@@ -99,13 +93,6 @@ a:hover {
 }
 /* If the screen size is small:*/
 @media screen and (max-width: 600px) {
-  .top-container {
-    background-position:50% 0;
-    background-size:800px;
-  }
-  .top-container {
-    height: 300px;
-  }
   .top-nameplate {
     font-size: 2rem;
   }
