@@ -1,4 +1,7 @@
 /******** ELEMENT SELECTORS ********/
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: "Open Sans", sans-serif;
   margin: 0px;
@@ -30,6 +33,29 @@ a:hover {
   font-weight: bold;
 }
 /******** CLASS SELECTORS ********/
+/** NAVBAR **/
+.navbar {
+  background-color: #3a4750;  /* Black background color */
+  position: fixed;              /* Make it stick/fixed */
+  top: -50px;;                  /* Hide the navbar 50 px outside of the top view */
+  width: 100%;                  /* Full width */
+  transition: top 0.3s;         /* Transition effect when sliding down (and up) */
+  z-index: 1;                   /* Appear above the rest */
+}
+/* Style the navbar links */
+.navbar a {
+  float: right;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+}
+.navbar a:hover {
+  background-color: #eeeeee;
+  color: #d72323;
+  font-weight: bold;
+}
 /** CONTAINERS **/
 .top-container {
   background-attachment: fixed;
@@ -117,7 +143,7 @@ a:hover {
   padding: 0;
 }
 .profile-pic {
-  margin: 100px auto 0;
+  margin: 150px auto 0;
 }
 /** ROWS **/
 .row {

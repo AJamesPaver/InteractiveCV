@@ -11,6 +11,11 @@
 </head>
 
 <body>
+  <div class="navbar" id="navbar">
+    <a href="#" style="float: left;">Home</a>
+    <a href="#contact">Contact</a>
+    <a href="CV - James Paver - 2020.pdf" target="_blank">Download CV</a>
+  </div>
   <div class="top-container">
     <div class="nameplate-container">
       <h1 class="top-nameplate">James Paver</h1>
@@ -54,7 +59,7 @@
         <p>For a little over 3 years I worked in the Aero Performance department of the McLaren Formula One Team
           combining areas of aero development, vehicle dynamics and race engineering.</p>
         <p>I was heavily involved in programming, modelling and simulation development using MATLAB, Simulink and C++.
-          On occassion I was also the representative of the team as the trackside aerodynamicist at races and tests.</p>
+          I was also the representative of the team as the trackside aerodynamicist at races and tests.</p>
       </div>
     </div>
     <div class="row">
@@ -140,13 +145,28 @@
     </div>
   </div>
 
-  <div class="footer-container">
+  <div class="footer-container" id="contact">
     <h2>Contact</h2>
     <p class="footer-text">I'm currently available to work for you.</p>
     <a class="footer-link" href="https://www.linkedin.com/in/jamespaver" target="_blank">LinkedIn</a>
     <a class="footer-link" href="mailto:jamespaver@hotmail.com">Email</a>
     <p>© 2020 James Paver.</p>
   </div>
+
+  <script>
+  // When the user scrolls down 20px from the top of the document, slide down the navbar
+  // When the user scrolls to the top of the page, slide up the navbar (50px out of the top view)
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    if (document.body.scrollTop > window.innerHeight || document.documentElement.scrollTop > window.innerHeight) {
+      document.getElementById("navbar").style.top = "0";
+    } else {
+      document.getElementById("navbar").style.top = "-50px";
+    }
+  }
+</script>
+
 </body>
 
 </html>
