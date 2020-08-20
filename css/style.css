@@ -143,8 +143,18 @@ a:hover {
   transform: translate(-50%, -50%);
 }
 
+/** OTHER CLASSES **/
+
+.fade-in{
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+.fade-in.appear{
+  opacity: 1;
+}
+
 /* If the screen size is large:*/
-@media screen and (min-width: 601px) {
+@media screen and (min-width: 757px) {
   .top-nameplate {
     font-size: 5.265rem;
   }
@@ -159,7 +169,7 @@ a:hover {
   }
 }
 /* If the screen size is small:*/
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 756px) {
   .top-nameplate {
     font-size: 2rem;
   }
@@ -197,21 +207,21 @@ a:hover {
 /** ROWS **/
 .row {
   margin: 50px auto 0;
-  max-width: 700px;
+  max-width: 740px;
   padding-bottom: 50px;
 }
 .icon-container-odd {
-  min-width: 240px;
+  min-width: 280px;
   width: 25%;
 }
 .icon-container-even {
-  min-width: 240px;
+  min-width: 280px;
   width: 25%;
 }
 .icon {
   border-radius: 25%;
   margin: 20px;
-  width: 200px;
+  width: 240px;
 }
 .details-container {
   display: inline-block;

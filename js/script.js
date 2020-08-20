@@ -26,3 +26,37 @@ function closeNavBar() {
     // Close the navbar
     document.getElementById("navbar").style.width = "0px";
 }
+
+//Intersection observers
+const appearOptions = {
+    threshold: 1  // This dictates only when the whole element is inside the intersection it should fire
+};
+const appearOnScroll = new IntersectionObserver(
+    function(entries, appearOnScroll){
+        entries.forEach(entry => {
+            if (!entry.isIntersecting){
+                // Do nothing if not intersecting yet
+                return
+            } else {
+                // Add the appear class:
+                entry.target.classList.add('appear');
+                // Stop looking for this element anymore:
+                appearOnScroll.unobserve(entry.target);
+            }
+        })
+    },
+    appearOptions
+);
+
+// Now hook-up the intersection observer to the elements inside "faders"
+window.addEventListener('DOMContentLoaded', function() {
+    // We need to wait for the html to be loaded first, otherwise we can't find the elements
+
+    // Find all the fade classes in the document
+    const faders = document.querySelectorAll('.fade-in');
+
+    // Attach each fader to the intersection observer
+    faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+    })
+});
