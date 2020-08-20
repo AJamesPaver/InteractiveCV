@@ -10,13 +10,17 @@ body {
 h2 {
   font-family: "Montserrat", sans-serif;
   font-size: 2.5rem;
-  padding-top: 40px;
+  padding-top: 80px;
   padding-bottom: 40px;
   margin: 0;
 }
+h4 {
+  margin-block-start: 2.5rem;
+  margin-block-end: 0.5rem;
+  font-size: 1.1rem;
+}
 p {
   line-height: 2;
-  max-width: 500px;
   margin: 0 auto;
 }
 hr {
@@ -27,37 +31,73 @@ hr {
 }
 a {
   text-decoration: none;
+  transition: 0.3s;
 }
 a:hover {
   color: #d72323;
   font-weight: bold;
+  text-decoration: none;
 }
 /******** CLASS SELECTORS ********/
 /** NAVBAR **/
-.navbar {
-  background-color: #3a4750;  /* Black background color */
+.menu-container {
+  background-color: #3a4750;
+  border-radius: 5px;
+  padding: 8px;
   position: fixed;              /* Make it stick/fixed */
-  top: -50px;;                  /* Hide the navbar 50 px outside of the top view */
-  width: 100%;                  /* Full width */
+  left: 24px;
+  top: -50px;                   /* Hide the navbar 50 px outside of the top view */
+  cursor: pointer;
   transition: top 0.3s;         /* Transition effect when sliding down (and up) */
-  z-index: 1;                   /* Appear above the rest */
+  z-index: 3;                   /* Appear above the rest */
 }
-/* Style the navbar links */
-.navbar a {
-  float: right;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  text-decoration: none;
-}
-.navbar a:hover {
+.menu-bar1, .menu-bar2, .menu-bar3 {
+  width: 25px;
+  height: 3px;
   background-color: #eeeeee;
+  margin: 4px 0;
+  transition: 0.5s;
+}
+/* Animations for the hamburger icon */
+.change .menu-bar1 {
+  -webkit-transform: rotate(-45deg) translate(-6px, 5px);
+  transform: rotate(-45deg) translate(-5px, 5px);
+}
+.change .menu-bar2 {
+  opacity: 0;
+}
+.change .menu-bar3 {
+  -webkit-transform: rotate(45deg) translate(-6px, -5px);
+  transform: rotate(45deg) translate(-5px, -5px);
+}
+/* Navbar itself */
+.navbar {
+  height: 100%;     /* 100% Full-height */
+  width: 0;         /* 0 width - change this with JavaScript */
+  position: fixed;  /* Stay in place */
+  z-index: 2;       /* Stay on top */
+  top: 0;           /* Stay at the top */
+  left: 0;
+  background-color: #3a4750;
+  overflow-x: hidden;   /* Disable horizontal scroll */
+  padding-top: 60px;    /* Place content 60px from the top */
+  transition: 0.5s;     /* 0.5 second transition effect to slide in the sidenav */
+}
+/* The navigation menu links */
+.navbar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #eeeeee;
+  display: block;
+  transition: 0.3s;
+}
+/* When you mouse over the navigation links, change their color */
+.navbar a:hover {
   color: #d72323;
-  font-weight: bold;
 }
 /** CONTAINERS **/
-.top-container {
+.hero-container {
   background-attachment: fixed;
   background-color: #303841;
   background-image:url(../images/McLarenGrey.png);
@@ -102,6 +142,7 @@ a:hover {
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
 /* If the screen size is large:*/
 @media screen and (min-width: 601px) {
   .top-nameplate {
@@ -132,6 +173,7 @@ a:hover {
     margin: auto;
   }
 }
+
 .top-nameplate {
   border-bottom: 1px solid #eeeeee;
   font-weight: 900;
@@ -144,6 +186,13 @@ a:hover {
 }
 .profile-pic {
   margin: 150px auto 0;
+}
+.text-center-container{
+  display: inline-block;
+  max-width: 500px;
+  padding: 0 20px;
+  text-align: center;
+  width: 80%;
 }
 /** ROWS **/
 .row {
@@ -177,7 +226,12 @@ a:hover {
   font-size: 1.25rem;
   padding: 20px;
 }
+.email-link {
+  color: #d72323;
+  font-size: 1rem;
+  text-decoration: underline;
+}
 .footer-text {
   font-size: 1rem;
-  margin: 0 auto 40px;
+  margin: 0 auto 1.5rem;
 }

@@ -11,12 +11,20 @@
 </head>
 
 <body>
-  <div class="navbar" id="navbar">
-    <a href="#" style="float: left;">Home</a>
-    <a href="#contact">Contact</a>
-    <a href="CV - James Paver - 2020.pdf" target="_blank">Download CV</a>
+  <!-- Navbar hamburger button -->
+  <div class="menu-container" id="navbar-icon" onclick="openNavBar()">
+    <div class="menu-bar1"></div>
+    <div class="menu-bar2"></div>
+    <div class="menu-bar3"></div>
   </div>
-  <div class="top-container">
+  <!-- Navbar itself -->
+  <div id="navbar" class="navbar">
+    <a href="#">Home</a>
+    <a href="CV - James Paver - 2020.pdf" target="_blank">Download CV</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <div class="hero-container">
     <div class="nameplate-container">
       <h1 class="top-nameplate">James Paver</h1>
       <h2 class="top-header">An engineer and developer.</h2>
@@ -25,9 +33,14 @@
   <div class="profile-container">
     <img class="profile-pic" src="images/MonteBaldoProfileCropped.png" alt="profile" height="200px">
     <h2>Hi.</h2>
-    <p>I'm a Formula 1 simulation engineer.</p>
-    <p>I have a passion for making clever things and love to work with my team to make our work more insightful and more efficient.</p>
-    <p>I have proven success at taking programming and simulation literacy first hand into the highly pressurised F1 trackside environment.</p>
+    <div class="text-center-container">
+      <p>I'm a Formula 1 simulation development engineer.</p>
+      <br>
+      <p>I have a passion for making clever things and love to work with my team to make our work more insightful and more efficient.</p>
+      <br>
+      <p>Working in the highly pressurised environment of Formula 1, I collaborate and innovate to find the most promising areas of 
+        improvment and acheive the best solutions.</p>
+    </div>
   </div>
   <div class="experience-container">
     <h2>My Experience</h2>
@@ -89,8 +102,9 @@
       </div>
     </div>
   </div>
+
   <div class="education-container">
-    <h2>Education</h2>
+    <h2>My Education</h2>
     <div class="row">
       <div class="icon-container-odd">
         <img class="icon" src="images/Southampton.png" alt="">
@@ -147,23 +161,50 @@
 
   <div class="footer-container" id="contact">
     <h2>Contact</h2>
-    <p class="footer-text">I'm currently available to work for you.</p>
+    <div class="text-center-container">
+      <p class="footer-text" style="font-size: 1.1rem;">If you would like to work together on a project, 
+        to get more out of your data and your team, then please contact me.</p>
+      <p class="footer-text">I'm currently available to work for you.</p>
+    </div>
+    <h4>James Paver</h4>
+    <p class="footer-text">
+      A Formula 1 engineer and developer.
+      <br>
+      <a class="email-link" href="mailto:jamespaver@hotmail.com">jamespaver@hotmail.com</a>
+    </p>
     <a class="footer-link" href="https://www.linkedin.com/in/jamespaver" target="_blank">LinkedIn</a>
-    <a class="footer-link" href="mailto:jamespaver@hotmail.com">Email</a>
     <p>© 2020 James Paver.</p>
   </div>
 
+  <div class="hero-container">
+  </div>
+
   <script>
-  // When the user scrolls down 20px from the top of the document, slide down the navbar
+  // When the user scrolls down 100px from the top of the document, slide down the navbar
   // When the user scrolls to the top of the page, slide up the navbar (50px out of the top view)
   window.onscroll = function() {scrollFunction()};
 
   function scrollFunction() {
-    if (document.body.scrollTop > window.innerHeight || document.documentElement.scrollTop > window.innerHeight) {
-      document.getElementById("navbar").style.top = "0";
-    } else {
-      document.getElementById("navbar").style.top = "-50px";
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+      document.getElementById("navbar-icon").style.top = "24px";
+    } else if (!document.getElementById("navbar-icon").classList.contains('change')){
+        // Don't hide the close navbar button if the navbar is open!
+        document.getElementById("navbar-icon").style.top = "-50px";
     }
+  }
+  function openNavBar() {
+    // Transition the menu icon to a cross:
+    document.getElementById("navbar-icon").classList.toggle("change");
+    document.getElementById("navbar-icon").onclick = closeNavBar;
+    // Open the navbar
+    document.getElementById("navbar").style.width = "250px";
+  }
+  function closeNavBar() {
+    // Transition the menu icon to a cross:
+    document.getElementById("navbar-icon").classList.toggle("change");
+    document.getElementById("navbar-icon").onclick = openNavBar;
+    // Close the navbar
+    document.getElementById("navbar").style.width = "0px";
   }
 </script>
 
