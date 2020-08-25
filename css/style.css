@@ -92,7 +92,6 @@ a:hover {
   font-size: 25px;
   color: #eeeeee;
   display: block;
-  transition: 0.3s;
 }
 /* When you mouse over the navigation links, change their color */
 .navbar a:hover {
@@ -131,6 +130,14 @@ a:hover {
   color: #3a4750;
   position: relative;
 }
+.page-container-even a{
+  color: #3a4750;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.page-container-even a:hover {
+  color: #d72323;
+}
 .footer-container {
   background-color: #3a4750;
   font-size: 0.75rem;
@@ -139,6 +146,11 @@ a:hover {
 
 
 /** OTHER CLASSES **/
+
+.gradientbackground{
+  background-image: linear-gradient(rgba(58,71,80,0.7), rgba(58,71,80,0.1));
+  border-radius: 10px;
+}
 
 .fade-in{
   opacity: 0;
@@ -163,7 +175,7 @@ a:hover {
 /* If the screen size is small:*/
 @media screen and (max-width: 756px) {
   h1 {
-    font-size: 2rem;
+    font-size: 3rem;
   }
   .top-nameplate {
     font-size: 6rem;
