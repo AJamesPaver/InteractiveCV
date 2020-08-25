@@ -7,6 +7,13 @@ body {
   margin: 0px;
   text-align: center;
 }
+h1 {
+  border-bottom: 1px solid #eeeeee;
+  font-weight: 900;
+  font-size: 4rem;
+  margin: 0 auto 20px auto;
+  padding-bottom: 20px;
+}
 h2 {
   font-family: "Montserrat", sans-serif;
   font-size: 2.5rem;
@@ -24,12 +31,6 @@ p {
   line-height: 2;
   margin: 0 auto;
 }
-hr {
-  border-style: dotted none none;
-  border-width: 5px;
-  border-color: #eeeeee;
-  width: 5%;
-}
 a {
   text-decoration: none;
   transition: 0.3s;
@@ -42,7 +43,7 @@ a:hover {
 /******** CLASS SELECTORS ********/
 /** NAVBAR **/
 .menu-container {
-  background-color: #3a4750;
+  background-color: #d72323;
   border-radius: 5px;
   padding: 8px;
   position: fixed;              /* Make it stick/fixed */
@@ -102,47 +103,39 @@ a:hover {
   background-attachment: fixed;
   background-color: #303841;
   background-image:url(../images/McLarenGrey.png);
-  background-position:50% 0;
+  background-position: 50% 0;
   background-size:cover;
   background-repeat: no-repeat;
   overflow:hidden;
-  color: #eeeeee;
   position: relative;
+  height: 50vh;
+}
+.hero-container.fullheight{
   height: 100vh;
 }
-.profile-container {
-  background-color: #3a4750;
+.nameplate-container {
   color: #eeeeee;
-  position: relative;
-  padding-bottom: 6.25rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
-.experience-container {
-  background-color: #eeeeee;
-  color: #3a4750;
-  position: relative;
-}
-.education-container {
+.page-container-odd {
   background-color: #3a4750;
   color: #eeeeee;
   position: relative;
 }
-.interests-container {
+.page-container-even {
   background-color: #eeeeee;
   color: #3a4750;
   position: relative;
 }
 .footer-container {
   background-color: #3a4750;
-  padding: 0 0 40px;
   font-size: 0.75rem;
   color: #eeeeee;
 }
-.nameplate-container {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
+
 
 /** OTHER CLASSES **/
 
@@ -157,10 +150,7 @@ a:hover {
 /* If the screen size is large:*/
 @media screen and (min-width: 757px) {
   .top-nameplate {
-    font-size: 5.265rem;
-  }
-  .top-header {
-    font-size: 1.75rem;
+    font-size: 7rem;
   }
   .icon-container-odd {
     float: left;
@@ -171,11 +161,11 @@ a:hover {
 }
 /* If the screen size is small:*/
 @media screen and (max-width: 756px) {
-  .top-nameplate {
+  h1 {
     font-size: 2rem;
   }
-  .top-header {
-    font-size: 1rem;
+  .top-nameplate {
+    font-size: 5rem;
   }
   .icon-container-odd {
     margin: auto;
@@ -185,13 +175,8 @@ a:hover {
   }
 }
 
-.top-nameplate {
-  border-bottom: 1px solid #eeeeee;
-  font-weight: 900;
-  margin: 0 auto 20px auto;
-  padding-bottom: 20px;
-}
 .top-header {
+  font-size: 1.75rem;
   font-weight: normal;
   padding: 0;
 }
@@ -200,16 +185,17 @@ a:hover {
 }
 .text-center-container{
   display: inline-block;
-  max-width: 500px;
+  max-width: 600px;
   padding: 0 20px;
   text-align: center;
   width: 80%;
 }
 /** ROWS **/
 .row {
-  margin: 50px auto 0;
+  margin: 0 auto;
   max-width: 740px;
   padding-bottom: 50px;
+  padding-top: 50px;
 }
 .icon-container-odd {
   min-width: 280px;
@@ -226,10 +212,12 @@ a:hover {
 }
 .details-container {
   display: inline-block;
-  max-width: 420px;
   padding: 0 20px;
   text-align: justify;
   width: 75%;
+}
+.details-container.narrow {
+  max-width: 420px;
 }
 /** FOOTER **/
 .footer-link {

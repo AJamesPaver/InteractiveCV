@@ -14,6 +14,7 @@
   <!--- link to javascript -->
   <script src="js/script.js">
   </script>
+
   <!-- Navbar hamburger button -->
   <div class="menu-container" id="navbar-icon" onclick="openNavBar()">
     <div class="menu-bar1"></div>
@@ -22,19 +23,22 @@
   </div>
   <!-- Navbar itself -->
   <div id="navbar" class="navbar">
-    <a href="#" onclick="closeNavBar()">Home</a>
-    <a href="#experience" onclick="closeNavBar()">My Experience</a>
+    <a href="index.html#" onclick="closeNavBar()">Home</a>
+    <a href="index.html#experience" onclick="closeNavBar()">My Experience</a>
     <a href="CV - James Paver - 2020.pdf" target="_blank" onclick="closeNavBar()">Download CV</a>
-    <a href="#contact" onclick="closeNavBar()">Contact</a>
+    <a href="index.html#contact" onclick="closeNavBar()">Contact</a>
   </div>
 
-  <div class="hero-container">
+  <!-- hero picture at the top -->
+  <div class="hero-container fullheight">
     <div class="nameplate-container">
       <h1 class="top-nameplate">James Paver</h1>
       <h2 class="top-header">Engineer and developer.</h2>
     </div>
   </div>
-  <div class="profile-container">
+
+  <!-- Profile -->
+  <div class="page-container-odd" style="padding-bottom: 7rem;">
     <img class="profile-pic" src="images/MonteBaldoProfileCropped.png" alt="profile" height="200px">
     <div class="fade-in">
       <h2>Hi.</h2>
@@ -51,13 +55,15 @@
         improvement and acheive the best solutions.</p>
     </div>
   </div>
-  <div class="experience-container" id="experience">
+
+  <!-- Experience -->
+  <div class="page-container-even" id="experience">
     <h2>My Experience</h2>
     <div class="row">
       <div class="icon-container-odd fade-in">
         <img class="icon" src="images/MCL35.png" alt="">
       </div>
-      <div class="details-container">
+      <div class="details-container narrow">
         <div class="fade-in">
           <h3>McLaren Racing</h3>
           <h4>Simulation Development Engineer</h4>
@@ -77,7 +83,7 @@
       <div class="icon-container-even fade-in">
         <img class="icon" src="images/McLarenIcon.png" alt="">
       </div>
-      <div class="details-container">
+      <div class="details-container narrow">
         <div class="fade-in">
           <h3>McLaren Racing</h3>
           <h4>Aero Performance Engineer</h4>
@@ -95,7 +101,7 @@
       <div class="icon-container-odd fade-in">
         <img class="icon" src="https://aml-prod-images.azureedge.net/media/images/default-source/models/db11/db11_05_asset_019b9d02b9cf8b697fbc60ff00000f1b3f.jpg?sfvrsn=ab166bf9_2&width=1200&format=webp&quality=60" alt="">
       </div>
-      <div class="details-container">
+      <div class="details-container narrow">
         <div class="fade-in">
           <h3>Aston Martin Lagonda</h3>
           <h4>Junior Aerodynamicist</h4>
@@ -113,7 +119,7 @@
       <div class="icon-container-even fade-in">
         <img class="icon" src="images/McLarenWindTunnel.png" alt="">
       </div>
-      <div class="details-container">
+      <div class="details-container narrow">
         <div class="fade-in">
           <h3>McLaren Racing</h3>
           <h4>Student Placement - Aerodynamics</h4>
@@ -127,13 +133,14 @@
     </div>
   </div>
 
-  <div class="education-container">
+  <!-- Education -->
+  <div class="page-container-odd">
     <h2>My Education</h2>
     <div class="row">
       <div class="icon-container-odd fade-in">
         <img class="icon" src="images/Southampton.png" alt="">
       </div>
-      <div class="details-container">
+      <div class="details-container narrow">
         <div class="fade-in">
           <h3>University of Southampton</h3>
           <h4>Master of Engineering (MEng), Aerospace, Aeronautical and Astronautical Engineering, 1st Class.</h4>
@@ -150,7 +157,7 @@
       <div class="icon-container-even fade-in">
         <img class="icon" src="https://eabl.org/abl/wp-content/uploads/2017/09/Aylesbury-Grammar-School.png" alt="">
       </div>
-      <div class="details-container">
+      <div class="details-container narrow">
         <div class="fade-in">
           <h3>Aylesbury Grammar School</h3>
         </div>
@@ -165,13 +172,14 @@
     </div>
   </div>
 
-  <div class="interests-container">
+  <!-- Interests -->
+  <div class="page-container-even">
     <h2>My Interests</h2>
     <div class="row">
       <div class="icon-container-odd fade-in">
         <img class="icon" src="images/Mandlebrot.png" alt="">
       </div>
-      <div class="details-container">
+      <div class="details-container narrow">
         <div class="fade-in">
           <h3>Science, Engineering and Programming!</h3>
           <p>
@@ -185,7 +193,7 @@
       <div class="icon-container-even fade-in">
         <img class="icon" src="images/Hobbies.png" alt="">
       </div>
-      <div class="details-container">
+      <div class="details-container narrow">
         <div class="fade-in">
           <h3>My Hobbies</h3>
           <p>I have many personal hobbies, mainly those that involve the great outdoors!</p>
@@ -195,6 +203,7 @@
     </div>
   </div>
 
+  <!-- Footer -->
   <div class="footer-container" id="contact">
     <h2>Contact</h2>
     <div class="text-center-container">
@@ -208,12 +217,14 @@
       <br>
       <a class="email-link" href="mailto:jamespaver@hotmail.com">jamespaver@hotmail.com</a>
     </p>
-    <a class="footer-link" href="https://www.linkedin.com/in/jamespaver" target="_blank">LinkedIn</a>
+    <div class="footer-text">
+      <a class="footer-link" href="https://www.linkedin.com/in/jamespaver" target="_blank">LinkedIn</a>
+    </div>
     <p>© 2020 James Paver.</p>
   </div>
 
   <!--- picture reveal at the bottom -->
-  <div class="hero-container">
+  <div class="hero-container fullheight">
   </div>
 
 </body>
