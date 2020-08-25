@@ -119,6 +119,7 @@ a:hover {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  width: 75%;
 }
 .page-container-odd {
   background-color: #3a4750;
@@ -150,7 +151,7 @@ a:hover {
 /* If the screen size is large:*/
 @media screen and (min-width: 757px) {
   .top-nameplate {
-    font-size: 7rem;
+    font-size: 8rem;
   }
   .icon-container-odd {
     float: left;
@@ -165,7 +166,7 @@ a:hover {
     font-size: 2rem;
   }
   .top-nameplate {
-    font-size: 5rem;
+    font-size: 6rem;
   }
   .icon-container-odd {
     margin: auto;
