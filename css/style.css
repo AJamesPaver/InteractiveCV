@@ -175,7 +175,7 @@ a:hover {
 /* If the screen size is small:*/
 @media screen and (max-width: 756px) {
   h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
   .top-nameplate {
     font-size: 6rem;
