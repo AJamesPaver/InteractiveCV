@@ -3,28 +3,75 @@
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        document.getElementById("navbar-icon").style.top = "24px";
-    } else if (!document.getElementById("navbar-icon").classList.contains('change')){
-        // Don't hide the close navbar button if the navbar is open!
-        document.getElementById("navbar-icon").style.top = "-50px";
+    if (document.body.scrollTop > screen.height || document.documentElement.scrollTop > screen.height) {
+        // Scrolled one screen height, put away the navbar again
+        if (screen.width > 756) {
+            // Big screen - push up the navbar
+            closeNavBar();
+        }
+    }else{
+        if (screen.width > 756) {
+            // Big screen - pull down the navbar
+            openNavBar();
+        }
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            if (screen.width < 757) {
+                // Small screen - only pull down the navbar icon
+                document.getElementById("navbar-icon").style.top = "24px";
+            }
+        } else{
+            if (!document.getElementById("navbar-icon").classList.contains('change')){
+                // Only hide the navbar icon if the navbar is closed!
+                document.getElementById("navbar-icon").style.top = "-50px";
+                if (screen.width < 757) {
+                    // Small screen - hide the navbar
+                    document.getElementById("navbar").style.width = "0px";
+                }
+            }
+        }
     }
 }
 
-// Left hand navbar controls:
+// Window resize function to tidy-up the navbar if the screen size is reduced
+window.onresize = function() {resizeFunction()};
+
+function resizeFunction() {
+    if (!document.getElementById("navbar-icon").classList.contains('change')){
+        if (screen.width < 757) {
+            // Small screen - hide the navbar
+            document.getElementById("navbar").style.width = "0px";
+        }
+    }
+}
+
+// Navbar controls:
 function openNavBar() {
     // Transition the menu icon to a cross:
-    document.getElementById("navbar-icon").classList.toggle("change");
+    document.getElementById("navbar-icon").classList.add("change");
     document.getElementById("navbar-icon").onclick = closeNavBar;
     // Open the navbar
-    document.getElementById("navbar").style.width = "250px";
+    if (screen.width > 756) {
+        // Big screen - pull down the navbar
+        document.getElementById("navbar").style.top     = "0";
+        document.getElementById("navbar").style.width   = "100%";
+    }else{
+        // Small screen - pull across the navbar
+        document.getElementById("navbar").style.top     = "0";
+        document.getElementById("navbar").style.width   = "250px";
+    }
 }
 function closeNavBar() {
     // Transition the menu icon to a cross:
-    document.getElementById("navbar-icon").classList.toggle("change");
+    document.getElementById("navbar-icon").classList.remove("change");
     document.getElementById("navbar-icon").onclick = openNavBar;
     // Close the navbar
-    document.getElementById("navbar").style.width = "0px";
+    if (screen.width > 756) {
+        // Big screen - push up the navbar
+        document.getElementById("navbar").style.top = "-80px";
+    }else{
+        // Small screen - set the width to zero
+        document.getElementById("navbar").style.width = "0px";
+    }
 }
 
 //Intersection observers
