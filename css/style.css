@@ -272,6 +272,10 @@ a:hover {
   min-width: 280px;
   width: 25%;
 }
+.image-center {
+  min-width: 280px;
+  width: 75%;
+}
 .icon {
   border-radius: 25%;
   margin: 20px;
