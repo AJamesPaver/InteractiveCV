@@ -14,15 +14,17 @@
   <!--- link to javascript -->
   <script src="js/script.js">
   </script>
+
   <!-- Navbar hamburger button -->
-  <div class="menu-container" id="navbar-icon" onclick="openNavBar()">
-    <div class="menu-bar1"></div>
-    <div class="menu-bar2"></div>
-    <div class="menu-bar3"></div>
+  <div class="hamburger-container" id="hamburger-icon" onclick="openNavBar()">
+    <div class="hamburger-bar1"></div>
+    <div class="hamburger-bar2"></div>
+    <div class="hamburger-bar3"></div>
   </div>
+  <!-- Navbar icon -->
+  <div class="navbar-icon navbar-icon-grey" id="navbar-icon" onclick="topFunction()">J P</div>
   <!-- Navbar itself -->
   <div id="navbar" class="navbar">
-    <a href="index.html#" onclick="closeNavBar()" style="float: left; color: #d72323;">J P</a>
     <a href="index.html#contact" onclick="closeNavBar()">Contact</a>
     <a href="CV - James Paver - 2020.pdf" target="_blank" onclick="closeNavBar()">Download CV</a>
     <a href="index.html#experience" onclick="closeNavBar()">My Experience</a>
@@ -98,7 +100,7 @@
       <p class="footer-text" style="font-size: 1.1rem;">See more of my work experience here:</p>
     </div>
     <br>
-    <div class="footer-text">
+    <div class="footer-link">
       <a class="footer-link" href="index.html#experience">My Experience</a>
     </div>
     <p>© 2020 James Paver.</p>

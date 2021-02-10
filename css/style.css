@@ -44,8 +44,8 @@ a:hover {
 /******** CLASS SELECTORS ********/
 
 /*** NAVBAR ***/
-/* menu icon */
-.menu-container {
+/* hamburger icon */
+.hamburger-container {
   background-color: #d72323;
   border-radius: 5px;
   padding: 8px;
@@ -56,7 +56,7 @@ a:hover {
   transition: top 0.3s;         /* Transition effect when sliding down (and up) */
   z-index: 3;                   /* Appear above the rest */
 }
-.menu-bar1, .menu-bar2, .menu-bar3 {
+.hamburger-bar1, .hamburger-bar2, .hamburger-bar3 {
   width: 25px;
   height: 3px;
   background-color: #eeeeee;
@@ -64,16 +64,43 @@ a:hover {
   transition: 0.5s;
 }
 /* Animations for the hamburger icon */
-.change .menu-bar1 {
+.change .hamburger-bar1 {
   -webkit-transform: rotate(-45deg) translate(-6px, 5px);
   transform: rotate(-45deg) translate(-5px, 5px);
 }
-.change .menu-bar2 {
+.change .hamburger-bar2 {
   opacity: 0;
 }
-.change .menu-bar3 {
+.change .hamburger-bar3 {
   -webkit-transform: rotate(45deg) translate(-6px, -5px);
   transform: rotate(45deg) translate(-5px, -5px);
+}
+/* navbar icon */
+.navbar-icon {
+  border-radius: 5px;
+  font-size: 25px;
+  padding: 8px 12px 10px;
+  position: fixed;              /* Make it stick/fixed */
+  left: 24px;
+  top: -60px;                   /* Hide the navbar 50 px outside of the top view */
+  cursor: pointer;
+  transition: top 0.3s;         /* Transition effect when sliding down (and up) */
+  transition: background-color 0.8s ease; /* Transition effect when changing colour */
+  z-index: 3;                   /* Appear above the rest */
+}
+.navbar-icon-red{
+  background-color: #d72323;
+  color: #eeeeee;
+}
+.navbar-icon-grey{
+  background-color: #3a4750;
+  color: #d72323;
+}
+/* If the screen size is small:*/
+@media screen and (max-width: 756px) {
+  .navbar-icon {
+    display: none;
+  }
 }
 /* Navbar itself */
 .navbar {
@@ -264,7 +291,7 @@ a:hover {
 .footer-link {
   color: #eeeeee;
   font-size: 1.25rem;
-  padding: 20px;
+  margin: 0 auto 5rem;
 }
 .email-link {
   color: #d72323;
