@@ -6,7 +6,7 @@ function rand() {
 window.addEventListener('DOMContentLoaded', function() {
     // We need to wait for the html to be loaded first, otherwise we can't find the elements
     
-    var arrayLength = 100
+    var arrayLength = 60
     var Channel1    = []
     var Channel2    = []
 
@@ -79,7 +79,7 @@ window.addEventListener('DOMContentLoaded', function() {
         };
         
         Plotly.update('live-data-plot', data_update, {}, [0])
-    }, 250);
+    }, 500);
 
     var interval = setInterval(function() {
     
@@ -94,6 +94,6 @@ window.addEventListener('DOMContentLoaded', function() {
         
         Plotly.update('live-data-plot', data_update, {}, [1])
         
-    }, 500);
+    }, 1000);
 
 });
