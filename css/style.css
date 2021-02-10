@@ -17,6 +17,7 @@ h1 {
 h2 {
   font-family: "Montserrat", sans-serif;
   font-size: 2.5rem;
+  letter-spacing: .25rem;
   padding-top: 80px;
   padding-bottom: 40px;
   margin: 0;
@@ -41,7 +42,9 @@ a:hover {
   text-decoration: none;
 }
 /******** CLASS SELECTORS ********/
-/** NAVBAR **/
+
+/*** NAVBAR ***/
+/* menu icon */
 .menu-container {
   background-color: #d72323;
   border-radius: 5px;
@@ -74,7 +77,6 @@ a:hover {
 }
 /* Navbar itself */
 .navbar {
-  height: 100%;     /* 100% Full-height */
   width: 0;         /* 0 width - change this with JavaScript */
   position: fixed;  /* Stay in place */
   z-index: 2;       /* Stay on top */
@@ -82,12 +84,10 @@ a:hover {
   left: 0;
   background-color: #3a4750;
   overflow-x: hidden;   /* Disable horizontal scroll */
-  padding-top: 60px;    /* Place content 60px from the top */
   transition: 0.5s;     /* 0.5 second transition effect to slide in the sidenav */
 }
 /* The navigation menu links */
 .navbar a {
-  padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
   color: #eeeeee;
@@ -97,6 +97,30 @@ a:hover {
 .navbar a:hover {
   color: #d72323;
 }
+/* If the screen size is large:*/
+@media screen and (min-width: 757px) {
+  .navbar {
+    width: 100%;  /* 100% Full-width */
+    top: -80px;   /* Keep off the screen - will be shown by the javascript */
+  }
+  .navbar a {
+    float: right;
+    padding: 20px;
+  }
+}
+/* If the screen size is small:*/
+@media screen and (max-width: 756px) {
+  .navbar {
+    width: 0;           /* 0 width - change this with JavaScript */
+    height: 100%;       /* 100% Full-height */
+    padding-top: 60px;  /* Place content 60px from the top */
+  }
+  .navbar a {
+    float: left;
+    padding: 8px 8px 8px 32px;
+  }
+}
+
 /** CONTAINERS **/
 .hero-container {
   background-attachment: fixed;
@@ -118,6 +142,11 @@ a:hover {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  width: 75%;
+}
+.title-container {
+  padding-bottom: 40px;
+  padding-top: 40px;
   width: 75%;
 }
 .page-container-odd {
@@ -177,9 +206,6 @@ a:hover {
   h1 {
     font-size: 2.5rem;
   }
-  .top-nameplate {
-    font-size: 6rem;
-  }
   .icon-container-odd {
     margin: auto;
   }
@@ -203,10 +229,11 @@ a:hover {
   text-align: center;
   width: 80%;
 }
+
 /** ROWS **/
 .row {
   margin: 0 auto;
-  max-width: 740px;
+  max-width: 800px;
   padding-bottom: 50px;
   padding-top: 50px;
 }
@@ -230,8 +257,9 @@ a:hover {
   width: 75%;
 }
 .details-container.narrow {
-  max-width: 420px;
+  max-width: 480px;
 }
+
 /** FOOTER **/
 .footer-link {
   color: #eeeeee;
