@@ -22,7 +22,7 @@ window.addEventListener('DOMContentLoaded', function() {
         y: Channel1,
         mode: 'lines',
         line: {
-          color: '#80CAF6',
+          color: '#00FFFF',
           shape: 'spline'
         }
     }
@@ -40,8 +40,8 @@ window.addEventListener('DOMContentLoaded', function() {
       };
       
     var layout = {
-        plot_bgcolor: "black",
-        paper_bgcolor:"black",
+        plot_bgcolor: "#3a4750",
+        paper_bgcolor:"#3a4750",
         font: {
             color: "white"
         },
