@@ -41,6 +41,9 @@ a:hover {
   font-weight: bold;
   text-decoration: none;
 }
+canvas {
+  background: white;
+}
 /******** CLASS SELECTORS ********/
 
 /*** NAVBAR ***/
@@ -181,6 +184,14 @@ a:hover {
   color: #eeeeee;
   position: relative;
 }
+.page-container-odd a{
+  color: #eeeeee;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.page-container-odd a:hover {
+  color: #d72323;
+}
 .page-container-even {
   background-color: #eeeeee;
   color: #3a4750;
@@ -198,6 +209,11 @@ a:hover {
   background-color: #3a4750;
   font-size: 0.75rem;
   color: #eeeeee;
+}
+.footer-container-light {
+  background-color: #eeeeee;
+  font-size: 0.75rem;
+  color: #3a4750;
 }
 
 
@@ -261,8 +277,8 @@ a:hover {
 .row {
   margin: 0 auto;
   max-width: 800px;
-  padding-bottom: 50px;
-  padding-top: 50px;
+  padding-bottom: 40px;
+  padding-top: 40px;
 }
 .icon-container-odd {
   min-width: 280px;
@@ -294,6 +310,11 @@ a:hover {
 /** FOOTER **/
 .footer-link {
   color: #eeeeee;
+  font-size: 1.25rem;
+  margin: 0 auto 5rem;
+}
+.footer-link-light {
+  color: #3a4750;
   font-size: 1.25rem;
   margin: 0 auto 5rem;
 }

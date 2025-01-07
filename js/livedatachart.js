@@ -94,6 +94,6 @@ window.addEventListener('DOMContentLoaded', function() {
         if (iPoint > N){
             iPoint = 1
         }
-    }, 500);
+    }, 250);
 
 });
