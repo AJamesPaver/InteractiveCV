@@ -44,6 +44,10 @@ a:hover {
 canvas {
   background: white;
 }
+li {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 /******** CLASS SELECTORS ********/
 
 /*** NAVBAR ***/
