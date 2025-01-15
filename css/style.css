@@ -37,7 +37,7 @@ a {
   transition: 0.3s;
 }
 a:hover {
-  color: #d72323;
+  color: #0096aa;
   font-weight: bold;
   text-decoration: none;
 }
@@ -53,7 +53,7 @@ li {
 /*** NAVBAR ***/
 /* hamburger icon */
 .hamburger-container {
-  background-color: #d72323;
+  background-color: #0096aa;
   border-radius: 5px;
   padding: 8px;
   position: fixed;              /* Make it stick/fixed */
@@ -96,12 +96,12 @@ li {
   z-index: 3;                   /* Appear above the rest */
 }
 .navbar-icon-red{
-  background-color: #d72323;
+  background-color: #0096aa;
   color: #eeeeee;
 }
 .navbar-icon-grey{
   background-color: #3a4750;
-  color: #d72323;
+  color: #0096aa;
 }
 /* If the screen size is small:*/
 @media screen and (max-width: 756px) {
@@ -129,7 +129,7 @@ li {
 }
 /* When you mouse over the navigation links, change their color */
 .navbar a:hover {
-  color: #d72323;
+  color: #0096aa;
 }
 /* If the screen size is large:*/
 @media screen and (min-width: 757px) {
@@ -192,9 +192,14 @@ li {
   color: #eeeeee;
   font-size: 1.2rem;
   font-weight: bold;
+  border: 1px solid #0096aa;
+  padding: 4px 8px;
+  display: inline-block;
+  border-radius: 6px;
 }
 .page-container-odd a:hover {
-  color: #d72323;
+  background-color: #0096aa;
+  color: #eeeeee;
 }
 .page-container-even {
   background-color: #eeeeee;
@@ -205,9 +210,14 @@ li {
   color: #3a4750;
   font-size: 1.2rem;
   font-weight: bold;
+  border: 1px solid #0096aa;
+  padding: 4px 8px;
+  display: inline-block;
+  border-radius: 6px;
 }
 .page-container-even a:hover {
-  color: #d72323;
+  background-color: #0096aa;
+  color: #eeeeee;
 }
 .footer-container {
   background-color: #3a4750;
@@ -315,15 +325,17 @@ li {
 .footer-link {
   color: #eeeeee;
   font-size: 1.25rem;
+  font-weight: bold;
   margin: 0 auto 5rem;
 }
 .footer-link-light {
   color: #3a4750;
   font-size: 1.25rem;
+  font-weight: bold;
   margin: 0 auto 5rem;
 }
 .email-link {
-  color: #d72323;
+  color: #0096aa;
   font-size: 1rem;
   text-decoration: underline;
 }
