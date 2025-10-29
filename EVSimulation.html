@@ -9,10 +9,14 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans&display=swap">
     <!--- load Plotly -->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-3.1.0.min.js" charset="utf-8"></script>
     <!--- link to javascript -->
     <script src="js/script.js"></script>
     <script src="js/evsimulation.js"></script>
+    <!--- link to Three.js -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
+    <!--- link to papa parse -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 
 <body>
@@ -24,12 +28,14 @@
     <div class="hamburger-bar3"></div>
   </div>
   <!-- Navbar icon -->
-  <div class="navbar-icon navbar-icon-grey" id="navbar-icon" onclick="topFunction()">J P</div>
+  <div class="navbar-icon navbar-icon-center" id="navbar-icon" onclick="topFunction()">
+    <img src="images/JP_Logo.PNG" alt="JP">
+  </div>
   <!-- Navbar itself -->
   <div id="navbar" class="navbar">
     <a href="index.html#contact" onclick="closeNavBar()">Contact</a>
-    <a href="index.html#projects" onclick="closeNavBar()">My Projects</a>
-    <a href="index.html#experience" onclick="closeNavBar()">My Experience</a>
+    <a href="index.html#projects" onclick="closeNavBar()">Projects</a>
+    <a href="index.html#experience" onclick="closeNavBar()">Experience</a>
     <a href="index.html#" onclick="closeNavBar()">Home</a>
   </div>
 
@@ -40,8 +46,10 @@
   <!-- "white" section -->
   <div class="page-container-even">
     
-    <!-- intro statement -->
+    <!-- heading -->
     <h2>1D Electric Vehicle Simulation</h2>
+
+    <!-- intro statement -->
     <div class="row">
       <div class="details-container">
         <div class="fade-in">
@@ -81,7 +89,7 @@
         </div>
         <br>
         <div class="fade-in">
-            <p>Notice how the battery power behaves differently when the truck is loaded with payload and going downhill. The truck is able to regen and recharge some of the battery!
+            <p>Notice how the battery power behaves differently when the truck is loaded with payload and going downhill. The truck is able to regen and recharge some of the battery.
             </p>
         </div>
       </div>
@@ -128,7 +136,7 @@
             <br>
             <div class="fade-in">
                 <p>It takes a lot of very talented people to create the insights which will yield the best results. The key to success in Performance Simulation 
-                    is creating good relationships with the other teams so that we can all contribute to the overall "big picture" for product design!
+                    is creating good relationships with the other teams so that we can all contribute to the overall "big picture" for product design.
                 </p>
             </div>
         </div>

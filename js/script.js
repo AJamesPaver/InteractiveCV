@@ -8,23 +8,38 @@ function scrollFunction() {
         if (screen.width > 756) {
             // Big screen - push up the navbar
             closeNavBar();
-            // Change the color of the navbar icon
-            document.getElementById("navbar-icon").classList.remove("navbar-icon-grey");
-            document.getElementById("navbar-icon").classList.add("navbar-icon-red");
         }
-    }else{
+    } else if ((document.body.scrollTop == 0) && (document.documentElement.scrollTop == 0)) {
+        // At the top of the screen, hide everything:
+        if (!document.getElementById("hamburger-icon").classList.contains('change')){
+            // Only hide the navbar icon if the navbar is closed!
+            document.getElementById("hamburger-icon").style.top = "-50px";
+            if (screen.width < 757) {
+                // Small screen - hide the navbar
+                document.getElementById("navbar").style.width = "0px";
+            }
+        }
+        // Show the icon:
+        document.getElementById("navbar-icon").style.opacity = "1";
+        if (screen.width > 756) {
+            // Big screen - push up the navbar
+            closeNavBar();
+            document.getElementById("navbar-icon").classList.add("navbar-icon-center");
+            document.getElementById("navbar-icon").classList.remove("navbar-icon-grey");
+        }
+    } else {
         if (screen.width > 756) {
             // Big screen - pull down the navbar
             openNavBar();
-            document.getElementById("navbar-icon").style.top = "10px";
-            // Change the color of the navbar icon
+            document.getElementById("navbar-icon").classList.remove("navbar-icon-center");
             document.getElementById("navbar-icon").classList.add("navbar-icon-grey");
-            document.getElementById("navbar-icon").classList.remove("navbar-icon-red");
         }
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
             if (screen.width < 757) {
                 // Small screen - only pull down the hamburger icon
                 document.getElementById("hamburger-icon").style.top = "24px";
+                // Hide the icon:
+                document.getElementById("navbar-icon").style.opacity = "0";
             }
         } else{
             if (!document.getElementById("hamburger-icon").classList.contains('change')){
@@ -74,7 +89,7 @@ function closeNavBar() {
     // Close the navbar
     if (screen.width > 756) {
         // Big screen - push up the navbar
-        document.getElementById("navbar").style.top = "-80px";
+        document.getElementById("navbar").style.top = "-100px";
     }else{
         // Small screen - set the width to zero
         document.getElementById("navbar").style.width = "0px";
