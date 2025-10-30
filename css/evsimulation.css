@@ -1,0 +1,27 @@
+
+/******** ELEMENT SELECTORS ********/
+
+/******** CLASS SELECTORS ********/
+
+/******** ID SELECTORS ********/
+#scene-container {
+  width: 100%;
+  max-width: 800px;      /* The max width limit */
+  margin: 0 auto;         /* Centers it on the page */
+  aspect-ratio: 16 / 9;   /* Keeps correct proportions */
+  position: relative;
+}
+
+#threeD-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;         /* Removes default spacing */
+}
+
+/* If the screen size is small:*/
+@media (max-width: 756px) {
+  #scene-container {
+    max-width: 100%;
+    height: 300px;
+  }
+}

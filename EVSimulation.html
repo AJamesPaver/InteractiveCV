@@ -8,15 +8,17 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans&display=swap">
+    <link rel="stylesheet" href="css/evsimulation.css">
     <!--- load Plotly -->
     <script src="https://cdn.plot.ly/plotly-3.1.0.min.js" charset="utf-8"></script>
-    <!--- link to javascript -->
-    <script src="js/script.js"></script>
-    <script src="js/evsimulation.js"></script>
     <!--- link to Three.js -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/build/three.min.js"></script>
+    <!--- link to OBJ loader -->
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/OBJLoader.js"></script>
     <!--- link to papa parse -->
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <!--- link to javascript -->
+    <script src="js/script.js"></script>
 </head>
 
 <body>
@@ -49,6 +51,30 @@
     <!-- heading -->
     <h2>1D Electric Vehicle Simulation</h2>
 
+    <div class="row">
+        <div class="details-container">
+            <div class="fade-in">
+                <p>Take a look at this example I've written below of a truck simulation driving up and down a slope.
+                </p>
+            </div>
+            <br>
+            <div class="fade-in">
+                <p>This simple model considers the variable mass of the vehicle (with payload), the terrain slope angle, the rolling resistance forces from the tyres, the behaviour of a simple electric motor, 
+                    the electrical efficiency (in both propulsion and regen) and ancillary power draw from the battery.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simulation animation -->
+    <div class="row">
+        <div id="scene-container">
+            <canvas id="threeD-canvas"></canvas>
+        </div>
+        <div id="plot"></div>
+        <p>Example 1D Electric Truck Simulation with Regen capability.</p>
+    </div>
+
     <!-- intro statement -->
     <div class="row">
       <div class="details-container">
@@ -78,29 +104,10 @@
         </div>
         <br>
         <div class="fade-in">
-            <p>Take a look at this example I've written below of a truck simulation driving up and down a slope.
-            </p>
-        </div>
-        <br>
-        <div class="fade-in">
-            <p>This simple model considers the variable mass of the vehicle (with payload), the terrain slope angle, the rolling resistance forces from the tyres, the behaviour of a simple electric motor, 
-                the electrical efficiency (in both propulsion and regen) and ancillary power draw from the battery.
-            </p>
-        </div>
-        <br>
-        <div class="fade-in">
             <p>Notice how the battery power behaves differently when the truck is loaded with payload and going downhill. The truck is able to regen and recharge some of the battery.
             </p>
         </div>
       </div>
-    </div>
-
-    <!-- live chart -->
-    <div class="row">
-        <div class="details-container">
-            <canvas id="simulation" width="600" height="300"></canvas>
-            <p>Example 1D Electric Truck Simulation with Regen capability.</p>
-        </div>
     </div>
 
     <div class="row">
@@ -169,6 +176,8 @@
   <div class="hero-container fullheight">
   </div>
 
+  <!-- Place own JS LAST -->
+  <script src="js/evsimulation.js"></script>
 </body>
 
 </html>

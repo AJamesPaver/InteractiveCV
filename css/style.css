@@ -280,7 +280,7 @@ h1 > .highlight-text-gradient{
 /* If the screen size is small:*/
 @media screen and (max-width: 756px) {
   h1 {
-    font-size: 2.5rem;
+    font-size: 3.0rem;
   }
   .icon-container-odd {
     margin: auto;
