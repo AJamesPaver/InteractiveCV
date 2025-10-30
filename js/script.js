@@ -3,11 +3,22 @@
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
-    if (document.body.scrollTop > screen.height || document.documentElement.scrollTop > screen.height) {
+    if (document.body.scrollTop > (screen.height-100) || document.documentElement.scrollTop > (screen.height-100)) {
         // Scrolled one screen height, put away the navbar again
         if (screen.width > 756) {
             // Big screen - push up the navbar
             closeNavBar();
+        }
+    } else if (document.body.scrollTop > (screen.height/2) || document.documentElement.scrollTop > (screen.height/2)) {
+        const element = document.getElementById('hero-picture-top');
+        if (element) {
+            if (!element.classList.contains('fullheight')){
+                // Scrolled HALF screen height, put away the navbar again
+                if (screen.width > 756) {
+                    // Big screen - push up the navbar
+                    closeNavBar();
+                }
+            }
         }
     } else if ((document.body.scrollTop == 0) && (document.documentElement.scrollTop == 0)) {
         // At the top of the screen, hide everything:
