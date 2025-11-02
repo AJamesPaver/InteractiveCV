@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>James Paver - Train Dynamics Simulation</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans&display=swap">
+    <link rel="stylesheet" href="css/evsimulation.css">
+    <!--- load Plotly -->
+    <script src="https://cdn.plot.ly/plotly-3.1.0.min.js" charset="utf-8"></script>
+    <!--- link to Three.js -->
+    <script src="https://cdn.jsdelivr.net/npm/three/build/three.min.js"></script>
+    <!--- link to FBX loader -->
+    <!---<script src="https://cdn.jsdelivr.net/npm/fflate@0.8.2/umd/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/FBXLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/OBJLoader.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/GLTFLoader.js"></script>
+    <!--- link to papa parse -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <!--- link to javascript -->
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+
+  <!-- Navbar hamburger button -->
+  <div class="hamburger-container" id="hamburger-icon" onclick="openNavBar()">
+    <div class="hamburger-bar1"></div>
+    <div class="hamburger-bar2"></div>
+    <div class="hamburger-bar3"></div>
+  </div>
+  <!-- Navbar icon -->
+  <div class="navbar-icon navbar-icon-center" id="navbar-icon" onclick="topFunction()">
+    <img src="images/JP_Logo.PNG" alt="JP">
+  </div>
+  <!-- Navbar itself -->
+  <div id="navbar" class="navbar">
+    <a href="index.html#contact" onclick="closeNavBar()">Contact</a>
+    <a href="index.html#projects" onclick="closeNavBar()">Projects</a>
+    <a href="index.html#experience" onclick="closeNavBar()">Experience</a>
+    <a href="index.html#" onclick="closeNavBar()">Home</a>
+  </div>
+
+  <!-- hero picture at the top -->
+  <div class="hero-container" id="hero-picture-top" style="background-image:url(images/FortescueRoadRunner.png);">
+  </div>
+
+  <!-- "white" section -->
+  <div class="page-container-even">
+    
+    <!-- heading -->
+    <h2>1D Electric Vehicle Simulation</h2>
+
+    <div class="row">
+        <div class="details-container">
+            <div class="fade-in">
+                <p>Take a look at this example I've written below of a truck simulation driving up and down a slope.
+                </p>
+            </div>
+            <br>
+            <div class="fade-in">
+                <p>This simple model considers the variable mass of the vehicle (with payload), the terrain slope angle, the rolling resistance forces from the tyres, the behaviour of a simple electric motor, 
+                    the electrical efficiency (in both propulsion and regen) and ancillary power draw from the battery.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simulation animation -->
+    <div class="row">
+        <div id="scene-container">
+            <canvas id="threeD-canvas"></canvas>
+        </div>
+        <div id="plot"></div>
+        <p>Example 1D Electric Truck Simulation with Regen capability.</p>
+    </div>
+
+    <!-- intro statement -->
+    <div class="row">
+      <div class="details-container">
+        <div class="fade-in">
+            <p>Electric Heavy Industry vehicles are incredibly complex and costly to develop. Simulation empowers the engineering 
+                team to define requirements, perform attribute trade-offs and evalute the Total Cost of Ownership (TCO) of the system.
+            </p>
+        </div>
+        <br>
+        <div class="fade-in">
+            <p>At the heart of the simulation is the vehicle-dynamics model, this is what drives the vehicle over the 
+                defined terrain. In the case of mining haul-trucks, the performance of the vehicle driving up and down slopes 
+                can be very influential. The Liebherr T264 haul truck can take up to 240 tonnes of payload!
+            </p>
+        </div>
+        <br>
+        <div class="fade-in">
+            <p>The vehicle dynamics model considers the forces on the body of the vehicle, the torque provided by the motors and how that transfers 
+                to the wheels and the wheel & tyre forces including rolling resistance.
+            </p>
+        </div>
+        <br>
+        <div class="fade-in">
+            <p>The electrical model then considers the power required to drive the motors and the all-important efficiencies of each component in the powertrain. 
+                That power is then provided by the battery as either a <strong>discharge</strong> power, or a regenerative <strong>recharge</strong> power.
+            </p>
+        </div>
+        <br>
+        <div class="fade-in">
+            <p>Notice how the battery power behaves differently when the truck is loaded with payload and going downhill. The truck is able to regen and recharge some of the battery.
+            </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="details-container">
+            <div class="fade-in">
+                <p>In order to ensure that we are making the correct decisions, we must take into account the <strong>entire</strong> system. It's no good optimising 
+                    one part of the system, if the impact of that will be detrimental to another system. In engineering, we call this a "full" optimisation, 
+                    as opposed to a "partial" optimisation.
+                </p>
+            </div>
+            <br>
+            <div class="fade-in">
+                <p>The performance simulation team, therefore, must simulate the full electric vehicle including its powertrain, energy usage, thermals, masses, inertias and forces.
+                    Only then can we be sure we are making the correct performance trade-offs for the project.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- vehicle model image -->
+    <div class="row">
+        <img class="image-center fade-in" src="images/FortescueVehicleModel2.PNG" alt="">
+        <figcaption>Full-vehicle simulation allows us to evaluate the interaction of all sub-systems.</figcaption>
+    </div>
+
+    <div class="row">
+        <div class="details-container">
+            <div class="fade-in">
+                <p>The creation of such a complex vehicle model requires very good <strong>collaboration</strong> across the departments at Fortescue.
+                    This is one of the most rewarding parts of the job and something I focus a lot of my effort on. 
+                </p>
+            </div>
+            <br>
+            <div class="fade-in">
+                <p>It takes a lot of very talented people to create the insights which will yield the best results. The key to success in Performance Simulation 
+                    is creating good relationships with the other teams so that we can all contribute to the overall "big picture" for product design.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- truck image -->
+    <div class="row">
+        <img class="image-center fade-in" src="images/FortescueTruck.png" alt="">
+    </div>
+
+    <div class="row">
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-container">
+    <h2>See More</h2>
+    <div class="text-center-container">
+      <p class="footer-text" style="font-size: 1.1rem;">See more of my work experience here:</p>
+    </div>
+    <br>
+    <div class="footer-link">
+      <a class="footer-link" href="index.html#experience">My Experience</a>
+    </div>
+    <p>© 2025 James Paver.</p>
+  </div>
+
+  <!--- picture reveal at the bottom -->
+  <div class="hero-container fullheight">
+  </div>
+
+  <!-- Place own JS LAST -->
+  <script src="js/ltdsimulation.js"></script>
+</body>
+
+</html>
