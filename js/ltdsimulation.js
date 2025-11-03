@@ -5,6 +5,7 @@ window.addEventListener('DOMContentLoaded', function() {
   
   // --- GLOBALS ---
   let scene, camera, renderer, car, container, payload, oreCars, ground;
+  let lastcar;
   let simData = [];
   let isLoaded = false;
 
@@ -12,12 +13,16 @@ window.addEventListener('DOMContentLoaded', function() {
   let truckRotationX = 0
   let truckRotationZ = 0
 
+  let orecarlength = 10;
+
+  let cameraOrbitAngle = 0;
+
   let currentIndex = 0;
   const clock = new THREE.Clock();
-  let playbackSpeed = 10.0; // multiplier to speed up or slow down playback
+  let playbackSpeed = 25.0; // multiplier to speed up or slow down playback
   let currentSimTime = 0;  // tracks where we are in the simulation timeline
 
-  const payloadOffset = new THREE.Vector3(0.7, 0, 2.5); // local offset (in car space)
+  const payloadOffset = new THREE.Vector3(0, 1.1, 0); // local offset (in car space)
 
   // --- LOAD CSV DATA ---
   Papa.parse('data/RouteData_Train.csv', {
@@ -26,9 +31,16 @@ window.addEventListener('DOMContentLoaded', function() {
     dynamicTyping: true,
     complete: function(results) {
       const trackData = results.data;
+      // Copy the first row:
+      const firstRow = { ...trackData[0] };
+      const offset = -100;
+      firstRow["distance_m"] = firstRow["distance_m"] + offset;
+      firstRow["elevation_m"] = 0;
+      trackData.unshift(firstRow);
       initScene(trackData);
     }
   });
+
   // - Load the Sim Data:
   Papa.parse('data/simulation_log_train_20251101_150955.csv', {
     download: true,
@@ -41,6 +53,7 @@ window.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+  // ----------------------------------------------------------------------------------------
   // --- INITIALIZE 3D SCENE ---
   function initScene(trackData) {
     container = document.getElementById('scene-container');
@@ -80,18 +93,26 @@ window.addEventListener('DOMContentLoaded', function() {
     const rampGeometry = new THREE.ExtrudeGeometry(rampShape, extrudeSettings);
     // Center the geometry around z = 0 (by default it extends in +Z)
     rampGeometry.translate(0, 0, -roadWidth / 2);
-    const rampMaterial = new THREE.MeshPhongMaterial({ color: 0xA63E1A });
+    const rampMaterial = new THREE.MeshPhongMaterial({ color: 0x696969 });
     const rampMesh = new THREE.Mesh(rampGeometry, rampMaterial);
 
     scene.add(rampMesh);
 
     // === Add route line for context ===
+    let trackWidth = 2
     const lineMaterial = new THREE.LineBasicMaterial({ color: 0x808080 });
     const lineGeometry = new THREE.BufferGeometry().setFromPoints(
-      trackData.map(p => new THREE.Vector3(p.distance_m, p.elevation_m, 0))
+      trackData.map(p => new THREE.Vector3(p.distance_m, p.elevation_m, trackWidth/2))
     );
     const line = new THREE.Line(lineGeometry, lineMaterial);
     scene.add(line);
+    // Add second line:
+    const lineMaterial2 = new THREE.LineBasicMaterial({ color: 0x808080 });
+    const lineGeometry2 = new THREE.BufferGeometry().setFromPoints(
+      trackData.map(p => new THREE.Vector3(p.distance_m, p.elevation_m, -trackWidth/2))
+    );
+    const line2 = new THREE.Line(lineGeometry2, lineMaterial2);
+    scene.add(line2);
 
     // === Add ground plane for context ===
     ground = new THREE.Mesh(
@@ -101,6 +122,8 @@ window.addEventListener('DOMContentLoaded', function() {
     ground.rotation.x = -Math.PI / 2;
     ground.position.y = Math.min(...trackData.map(p => p.elevation_m)) - 1;
     scene.add(ground);
+
+    // === Load the MAIN car/locomotive: ===
 
     // instantiate a loader
     const loader = new THREE.GLTFLoader();
@@ -117,7 +140,14 @@ window.addEventListener('DOMContentLoaded', function() {
         car.rotation.x = truckRotationX;
         car.rotation.z = truckRotationZ;
 
+        // Add the last car:
+        lastcar = car.clone(true);
+        lastcar.position.set(0, 0, 0);
+        lastcar.rotation.x = truckRotationX;
+        lastcar.rotation.z = truckRotationZ;
+
         scene.add( car );
+        scene.add( lastcar );
         isLoaded = true;
       },
       // called when loading is in progress
@@ -131,7 +161,7 @@ window.addEventListener('DOMContentLoaded', function() {
     );
 
     // === Create Ore Car Geometry ===
-    const oreCarGeom = new THREE.BoxGeometry(10, 2, 2);  // width, height, depth
+    const oreCarGeom = new THREE.BoxGeometry(orecarlength, 2, 2);  // width, height, depth
     const oreCarMat = new THREE.MeshPhongMaterial({ color: 0xD3D3D3 });
 
     // Create array to store ore cars
@@ -144,37 +174,23 @@ window.addEventListener('DOMContentLoaded', function() {
         oreCars.push(carMesh);
     }
 
-    // --- Create payload geometry (e.g., a dome) ---
-    const radius = 1.8;
-    const widthSegments = 32;
-    const heightSegments = 16;
+    // --- Create payload geometry ---
+    payload = [];
+    const payloadGeometry = new THREE.BoxGeometry(orecarlength*0.9, 1.5, 1.5);  // width, height, depth
+    const payloadMaterial = new THREE.MeshPhongMaterial({ color: 0x6F4E37 });
 
-    // thetaStart = 0, thetaLength = Math.PI / 2 gives the *upper* hemisphere
-    const payloadGeometry = new THREE.SphereGeometry(
-      radius,
-      widthSegments,
-      heightSegments,
-      0,                  // phiStart
-      Math.PI,            // phiLength → upper half
-      0,                  // thetaStart
-      Math.PI             // thetaLength → upper half
-    );
-    const payloadMaterial = new THREE.MeshStandardMaterial({
-      color: 0x6F4E37,
-      roughness: 0.6,
-      metalness: 0.1
-    });
-    payload = new THREE.Mesh(payloadGeometry, payloadMaterial);
-
-    // --- Position relative to the car ---
-    payload.position.set(0, 2.5, 0); // tweak y to sit in the truck bed
-
-    scene.add(payload);
+    for (let i = 1; i <= 18; i++) {
+        const payloadMesh = new THREE.Mesh(payloadGeometry, payloadMaterial);
+        payloadMesh.position.set(0, 0, 0); // initial position
+        scene.add(payloadMesh);
+        payload.push(payloadMesh);
+    }
 
     camera.position.set(0, 10, 10);
     camera.lookAt(0,0,0);
   }
 
+  // ----------------------------------------------------------------------------------------
   // --- INITIALIZE PLOT ---
   function initPlot() {
     const time = simData.map(d => d.time_s);
@@ -247,6 +263,7 @@ window.addEventListener('DOMContentLoaded', function() {
     Plotly.newPlot('plot', data, layout);
   }
   
+  // ----------------------------------------------------------------------------------------
   // --- UPDATE PLOT ---
   function updatePlot(currentSimTime) {
     const idx = simData.findIndex(d => d.time_s >= currentSimTime);
@@ -296,18 +313,29 @@ window.addEventListener('DOMContentLoaded', function() {
     Plotly.relayout('plot', update);
   }
 
+  // ----------------------------------------------------------------------------------------
   // --- Smooth chase camera that follows a moving vehicle ---
   function updateChaseCamera(car, camera, deltaTime, options = {}) {
     // Default configuration
     const {
-      offset = new THREE.Vector3(50, 20, 50),     // Camera offset in car local space
-      lookAhead = new THREE.Vector3(-50, 0, 0),  // Point ahead of the car to look at
-      followStrength = 4.0,                    // Higher = faster follow (LERP factor)
-      rotationLag = 0.15                       // How much the camera lags behind car rotation
+      offset = new THREE.Vector3(40, 20, 40),   // Camera offset in car local space
+      lookAhead = new THREE.Vector3(0, 0, 0),   // Point ahead of the car to look at
+      followStrength = 4.0,                     // Higher = faster follow (LERP factor)
+      rotationLag = 0.15,                       // How much the camera lags behind car rotation
+      orbitSpeed = 0.01                          // Orbit speed in rad/s
     } = options;
 
-    // --- Step 1: Compute desired camera position ---
-    const desiredOffset = offset.clone().applyQuaternion(car.quaternion);
+    // --- Step 0: Update the orbit angle ---
+    cameraOrbitAngle = cameraOrbitAngle + (orbitSpeed * deltaTime);
+
+    // --- Step 1: Compute the orbiting camera position: ---
+    const radius = Math.sqrt(offset.x ** 2 + offset.z ** 2);
+    const orbitX = Math.sin(cameraOrbitAngle) * radius;
+    const orbitZ = Math.cos(cameraOrbitAngle) * radius;
+    const newOffset = new THREE.Vector3(orbitX, offset.y, orbitZ);
+
+    // --- Step 2: Compute desired camera position ---
+    const desiredOffset = newOffset.clone().applyQuaternion(car.quaternion);
     const desiredPosition = car.position.clone().add(desiredOffset);
 
     if (!isNaN(desiredPosition.x) && !isNaN(desiredPosition.y) && !isNaN(desiredPosition.z)){
@@ -332,19 +360,25 @@ window.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // ----------------------------------------------------------------------------------------
   // --- UPDATE PAYLOAD ---
-  function updatePayload(car, payload, showPayload) {
-    // Compute payload position in world space
-    const worldOffset = payloadOffset.clone().applyQuaternion(car.quaternion);
-    payload.position.copy(car.position.clone().add(worldOffset));
+  function updatePayload(oreCars, payload, showPayload) {
+    for (let i = 1; i <= 18; i++) {
+      const thisPayload = payload[i - 1]; // mesh index starts at 0
+      const thisOreCar = oreCars[i - 1]; // mesh index starts at 0
+      // Compute payload position in world space
+      const worldOffset = payloadOffset.clone().applyQuaternion(thisOreCar.quaternion);
+      thisPayload.position.copy(thisOreCar.position.clone().add(worldOffset));
 
-    // Make the payload follow car’s rotation (optional)
-    payload.quaternion.copy(car.quaternion);
+      // Make the payload follow car’s rotation (optional)
+      thisPayload.quaternion.copy(thisOreCar.quaternion);
 
-    // Show/hide based on signal
-    payload.visible = !!showPayload;
+      // Show/hide based on signal
+      thisPayload.visible = !!showPayload;
+    }
   }
 
+  // ----------------------------------------------------------------------------------------
   // --- ANIMATION LOOP ---
   function animate() {
     requestAnimationFrame(animate);
@@ -396,16 +430,28 @@ window.addEventListener('DOMContentLoaded', function() {
 
         }
 
+        // Update the LAST car:
+        lastcar.position.x = d1.Vehicle_19_cycledistance_m + (d2.Vehicle_19_cycledistance_m - d1.Vehicle_19_cycledistance_m) * t;
+        lastcar.position.y = d1.Vehicle_19_elevation_m + (d2.Vehicle_19_elevation_m - d1.Vehicle_19_elevation_m) * t;
+
+        // Rotate:
+        heading = truckRotationY + ((Math.PI / 180) * (d1.Vehicle_19_heading_deg + (d2.Vehicle_19_heading_deg - d1.Vehicle_19_heading_deg) * t));
+        if (heading >= (2 * Math.PI)){
+          heading = heading - (2 * Math.PI)
+        }
+        lastcar.rotation.y = heading;
+
         // Update payload:
-        const showPayload = d1.Vehicle_0_payloadpresent > 0;
-        updatePayload(car, payload, showPayload);
+        const showPayload = d1.Vehicle_1_payloadpresent > 0;
+        updatePayload(oreCars, payload, showPayload);
 
         // Update the chase camera
         updateChaseCamera(car, camera, deltaTime, {
-          offset: new THREE.Vector3(50, 20, 50),
-          lookAhead: new THREE.Vector3(-50, 0, 0),
+          offset: new THREE.Vector3(40, 20, 40),
+          lookAhead: new THREE.Vector3(0, 0, 20),
           followStrength: 3.5,
-          rotationLag: 0.2
+          rotationLag: 0.2,
+          orbitSpeed: 0.01
         });
 
         // update chart cursor
@@ -422,6 +468,7 @@ window.addEventListener('DOMContentLoaded', function() {
       }
   }
 
+  // ----------------------------------------------------------------------------------------
   // --- RESIZE HANDLER ---
   window.addEventListener('resize', () => {
     const width = container.clientWidth;

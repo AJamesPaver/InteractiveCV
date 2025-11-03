@@ -45,25 +45,32 @@
   </div>
 
   <!-- hero picture at the top -->
-  <div class="hero-container" id="hero-picture-top" style="background-image:url(images/FortescueRoadRunner.png);">
+  <div class="hero-container" id="hero-picture-top" style="background-image:url(images/Fortescue-locomotive-Port-Hedland.jpg);">
   </div>
 
   <!-- "white" section -->
   <div class="page-container-even">
     
     <!-- heading -->
-    <h2>1D Electric Vehicle Simulation</h2>
+    <h2>Longitudinal Train Dynamics Simulation</h2>
 
     <div class="row">
         <div class="details-container">
             <div class="fade-in">
-                <p>Take a look at this example I've written below of a truck simulation driving up and down a slope.
+                <p>This simulation demonstrates a physics based model of a <strong>battery-electric heavy haul train</strong>, consisting of 
+                    two locomotives - one leading and one trailing - and eighteen ore cars.
                 </p>
             </div>
             <br>
             <div class="fade-in">
-                <p>This simple model considers the variable mass of the vehicle (with payload), the terrain slope angle, the rolling resistance forces from the tyres, the behaviour of a simple electric motor, 
-                    the electrical efficiency (in both propulsion and regen) and ancillary power draw from the battery.
+                <p>The simulation predicts the <strong>dynamic in-train forces</strong> and <strong>energy usage</strong> as the 
+                    consist hauls unloaded wagons uphill, and returns loaded wagons downhill.
+                </p>
+            </div>
+            <br>
+            <div class="fade-in">
+                <p>Such simulations show how physics modelling, together with data visualisation, allow for the prediction of complex 
+                    constraints in electro-mechanical systems which must be considered when optimising the <strong>design</strong> and <strong>operation</strong> of dynamic systems.
                 </p>
             </div>
         </div>
@@ -74,92 +81,97 @@
         <div id="scene-container">
             <canvas id="threeD-canvas"></canvas>
         </div>
-        <div id="plot"></div>
-        <p>Example 1D Electric Truck Simulation with Regen capability.</p>
+        <div id="plot">
+        </div>
+        <p>Example Longitudinal Electric Haul Train Simulation with Regen capability.</p>
     </div>
 
-    <!-- intro statement -->
+    <!-- details paragraphs -->
     <div class="row">
       <div class="details-container">
         <div class="fade-in">
-            <p>Electric Heavy Industry vehicles are incredibly complex and costly to develop. Simulation empowers the engineering 
-                team to define requirements, perform attribute trade-offs and evalute the Total Cost of Ownership (TCO) of the system.
+            <p>The design of a new <strong>battery-electric heavy haul locomotive</strong> is an incredibly complex, multifaceted 
+                project with many different, non-intuitive <strong>constraints</strong>.
             </p>
         </div>
         <br>
         <div class="fade-in">
-            <p>At the heart of the simulation is the vehicle-dynamics model, this is what drives the vehicle over the 
-                defined terrain. In the case of mining haul-trucks, the performance of the vehicle driving up and down slopes 
-                can be very influential. The Liebherr T264 haul truck can take up to 240 tonnes of payload!
+            <p>The purpose of data science and physics simulation, is to provide the team with the <strong>most valuable insight</strong> 
+                to be able to best position the product for the chosen application. Taking into account electrical, mechanical, thermal, 
+                financial, operational and other constraints.
+            </p>
+            <p>One of the key constraints of heavy-haul locomotives is the <strong>in-train forces</strong>. Heavy-haul trains are normally 
+                hundreds of cars long, weighing tens-of-thousands of tons, spanning multiple kilometers in a single moving vehicle! 
             </p>
         </div>
         <br>
         <div class="fade-in">
-            <p>The vehicle dynamics model considers the forces on the body of the vehicle, the torque provided by the motors and how that transfers 
-                to the wheels and the wheel & tyre forces including rolling resistance.
+            <p>The resulting forces are non-linear, complex to predict and depend on:
             </p>
+            <ul>
+            <div class="fade-in">
+                <li>The consist configuration (number and locations of ore cars and locomotives in the train)</li>
+            </div>
+            <div class="fade-in">
+                <li>The masses of each of the cars.</li>
+            </div>
+            <div class="fade-in">
+                <li>The tractive effort and control behaviour of the locomotives - synchronous vs. asynchronous control.</li>
+            </div>
+            <div class="fade-in">
+                <li>The track topology in grade and curvature.</li>
+            </div>
+            <div class="fade-in">
+                <li>The resistance forces (rolling and aerodynamic) of each of the vehicles in the train.</li>
+            </div>
+            <div class="fade-in">
+                <li>The non-linear dynamics of the drawbar mechanisms.</li>
+            </div>
+            </ul>
         </div>
         <br>
         <div class="fade-in">
-            <p>The electrical model then considers the power required to drive the motors and the all-important efficiencies of each component in the powertrain. 
-                That power is then provided by the battery as either a <strong>discharge</strong> power, or a regenerative <strong>recharge</strong> power.
-            </p>
-        </div>
-        <br>
-        <div class="fade-in">
-            <p>Notice how the battery power behaves differently when the truck is loaded with payload and going downhill. The truck is able to regen and recharge some of the battery.
+            <p>These forces must be kept within limits at all times during the operation of the train. This can have a severe impact 
+                on the amount of energy which can be <strong>regenerated</strong> whilst driving <strong>loaded downhill</strong>.
             </p>
         </div>
       </div>
     </div>
+  </div>
 
+  <div class="hero-container" style="background-image:url(images/FortescueLocomotiveJames.png); background-position: 50% 60%;">
+  </div>
+
+  <!-- "white" section -->
+  <div class="page-container-even">
     <div class="row">
         <div class="details-container">
             <div class="fade-in">
-                <p>In order to ensure that we are making the correct decisions, we must take into account the <strong>entire</strong> system. It's no good optimising 
-                    one part of the system, if the impact of that will be detrimental to another system. In engineering, we call this a "full" optimisation, 
-                    as opposed to a "partial" optimisation.
+                <p>This simulation (written in Python and C++) represents such a <strong>multi-vehicle train system</strong> 
+                    where each locomotive and ore car follows a defined distance-vs-elevation profile.
+                </p>
+            </div>
+        <br>
+            <div class="fade-in">
+                <p>The locomotives attempt to follow a speed-profile, generating motor torque with an electric motor model and 
+                    <strong>regenerating electrical power</strong> when braking downhill, returning the energy to the battery system.
+                </p>
+            </div>
+            <div class="fade-in">
+                <p>The simulation computes <strong>each of the drawbar forces</strong> along the train, both compressive and tensile, and 
+                    predicts the dynamics of the ore cars which are pushed and pulled by these drawbars.
                 </p>
             </div>
             <br>
             <div class="fade-in">
-                <p>The performance simulation team, therefore, must simulate the full electric vehicle including its powertrain, energy usage, thermals, masses, inertias and forces.
-                    Only then can we be sure we are making the correct performance trade-offs for the project.
+                <p>A linked <strong>3D animation</strong> built with Three.js visualises the train travelling along its 
+                    route. A series of Plotly.js charts display the numerical data from the simulation and update the key 
+                    metrics in real-time alongside the 3D animation, including battery state-of-charge, vehicle speed and 
+                    drawbar forces along the entire train.
                 </p>
             </div>
         </div>
     </div>
-
-    <!-- vehicle model image -->
-    <div class="row">
-        <img class="image-center fade-in" src="images/FortescueVehicleModel2.PNG" alt="">
-        <figcaption>Full-vehicle simulation allows us to evaluate the interaction of all sub-systems.</figcaption>
-    </div>
-
-    <div class="row">
-        <div class="details-container">
-            <div class="fade-in">
-                <p>The creation of such a complex vehicle model requires very good <strong>collaboration</strong> across the departments at Fortescue.
-                    This is one of the most rewarding parts of the job and something I focus a lot of my effort on. 
-                </p>
-            </div>
-            <br>
-            <div class="fade-in">
-                <p>It takes a lot of very talented people to create the insights which will yield the best results. The key to success in Performance Simulation 
-                    is creating good relationships with the other teams so that we can all contribute to the overall "big picture" for product design.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- truck image -->
-    <div class="row">
-        <img class="image-center fade-in" src="images/FortescueTruck.png" alt="">
-    </div>
-
-    <div class="row">
-    </div>
-
   </div>
 
   <!-- Footer -->
