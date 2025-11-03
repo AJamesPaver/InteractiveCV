@@ -115,13 +115,37 @@ window.addEventListener('DOMContentLoaded', function() {
     scene.add(line2);
 
     // === Add ground plane for context ===
-    ground = new THREE.Mesh(
-      new THREE.PlaneGeometry(5000, 5000),
-      new THREE.MeshLambertMaterial({ color: 0xE07A3E })
-    );
-    ground.rotation.x = -Math.PI / 2;
-    ground.position.y = Math.min(...trackData.map(p => p.elevation_m)) - 1;
-    scene.add(ground);
+    // Define your location (longitude, latitude, zoom)
+    const lon = 118.5646;
+    const lat = -20.4409;
+    const zoom = 12;
+    const mapWidth = 1024;
+    const mapHeight = 1024;
+
+    // Calculate ground resolution for this latitude and zoom
+    const metersPerPixel = 156543.03392 * Math.cos(lat * Math.PI / 180) / Math.pow(2, zoom);
+    const textureWidthMeters = metersPerPixel * mapWidth;
+    const textureHeightMeters = metersPerPixel * mapHeight;
+
+    // Use Mapbox Static API
+    const mapURL = `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/${lon},${lat},${zoom}/${mapWidth}x${mapHeight}?access_token=pk.eyJ1IjoiYWphbWVzcGF2ZXIiLCJhIjoiY21oajhkNzh1MHV3azJtcXY4cWY2ejgweCJ9.6xL-0YVHhDldc_X_teIXTQ`;
+
+    const groundloader = new THREE.TextureLoader();
+    const groundTexture = groundloader.load(mapURL, () => {
+      groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping;
+
+      const planeWidth = 60000;  // meters
+      const planeHeight = 5000;  // meters
+      // Match real-world scale
+      groundTexture.repeat.set(planeWidth / textureWidthMeters, planeHeight / textureHeightMeters);
+
+      const groundMaterial = new THREE.MeshLambertMaterial({ map: groundTexture });
+      ground = new THREE.Mesh(new THREE.PlaneGeometry(60000, 5000), groundMaterial);
+      ground.rotation.x = -Math.PI / 2;
+      ground.position.y = Math.min(...trackData.map(p => p.elevation_m)) - 1;
+      ground.position.x = 25000;
+      scene.add(ground);
+    });
 
     // === Load the MAIN car/locomotive: ===
 
@@ -417,9 +441,6 @@ window.addEventListener('DOMContentLoaded', function() {
           heading = heading - (2 * Math.PI)
         }
         car.rotation.y = heading;
-
-        // Update the ground position:
-        ground.position.x = car.position.x
 
         // Update Ore Car Positions:
         for (let i = 1; i <= 18; i++) {

@@ -93,13 +93,27 @@ window.addEventListener('DOMContentLoaded', function() {
     scene.add(line);
 
     // === Add ground plane for context ===
-    const ground = new THREE.Mesh(
-      new THREE.PlaneGeometry(5000, 5000),
-      new THREE.MeshLambertMaterial({ color: 0xE07A3E })
-    );
-    ground.rotation.x = -Math.PI / 2;
-    ground.position.y = Math.min(...trackData.map(p => p.elevation_m)) - 1;
-    scene.add(ground);
+    // Define your location (longitude, latitude, zoom)
+    const lon = 119.3941;
+    const lat = -22.3297;
+    const zoom = 14;
+    const mapWidth = 1024;
+    const mapHeight = 1024;
+
+    // Use Mapbox Static API
+    const mapURL = `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/${lon},${lat},${zoom}/${mapWidth}x${mapHeight}?access_token=pk.eyJ1IjoiYWphbWVzcGF2ZXIiLCJhIjoiY21oajhkNzh1MHV3azJtcXY4cWY2ejgweCJ9.6xL-0YVHhDldc_X_teIXTQ`;
+
+    const groundloader = new THREE.TextureLoader();
+    const groundTexture = groundloader.load(mapURL, () => {
+      groundTexture.wrapS = groundTexture.wrapT = THREE.ClampToEdgeWrapping;
+      groundTexture.repeat.set(1, 1);
+
+      const groundMaterial = new THREE.MeshLambertMaterial({ map: groundTexture });
+      const ground = new THREE.Mesh(new THREE.PlaneGeometry(5000, 5000), groundMaterial);
+      ground.rotation.x = -Math.PI / 2;
+      ground.position.y = Math.min(...trackData.map(p => p.elevation_m)) - 1;
+      scene.add(ground);
+    });
 
     // instantiate a loader
     const loader = new THREE.OBJLoader();
@@ -127,11 +141,6 @@ window.addEventListener('DOMContentLoaded', function() {
         console.log( 'An error happened' );
       }
     );
-
-    // --- Create payload geometry (e.g., a dome) ---
-
-
-
 
     // --- Dome (half-sphere) payload geometry ---
     const radius = 1.8;
