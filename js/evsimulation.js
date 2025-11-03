@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
   let currentIndex = 0;
   const clock = new THREE.Clock();
-  let playbackSpeed = 6.0; // multiplier to speed up or slow down playback
+  let playbackSpeed = 10.0; // multiplier to speed up or slow down playback
   let currentSimTime = 0;  // tracks where we are in the simulation timeline
 
   const payloadOffset = new THREE.Vector3(0.7, 0, 2.5); // local offset (in car space)
