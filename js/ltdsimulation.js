@@ -22,6 +22,8 @@ window.addEventListener('DOMContentLoaded', function() {
   let playbackSpeed = 25.0; // multiplier to speed up or slow down playback
   let currentSimTime = 0;  // tracks where we are in the simulation timeline
 
+  let cameraStartTime = performance.now();
+
   const payloadOffset = new THREE.Vector3(0, 1.1, 0); // local offset (in car space)
 
   // --- LOAD CSV DATA ---
@@ -210,7 +212,7 @@ window.addEventListener('DOMContentLoaded', function() {
         payload.push(payloadMesh);
     }
 
-    camera.position.set(0, 10, 10);
+    camera.position.set(0, 0, 0);
     camera.lookAt(0,0,0);
   }
 
@@ -343,35 +345,49 @@ window.addEventListener('DOMContentLoaded', function() {
     // Default configuration
     const {
       offset = new THREE.Vector3(40, 20, 40),   // Camera offset in car local space
-      lookAhead = new THREE.Vector3(0, 0, 0),   // Point ahead of the car to look at
+      lookAhead = new THREE.Vector3(0, 0, 20),  // Point ahead of the car to look at
       followStrength = 4.0,                     // Higher = faster follow (LERP factor)
       rotationLag = 0.15,                       // How much the camera lags behind car rotation
-      orbitSpeed = 0.01                          // Orbit speed in rad/s
+      orbitSpeed = 0.01,                        // Orbit speed in rad/s
+      introHeightBoost = 500,                    // How much higher to start
+      introDistanceLag = 1000,                  // How much further back to start
+      introDuration = 20.0                       // Duration in seconds to settle to normal height
     } = options;
 
-    // --- Step 0: Update the orbit angle ---
+    // --- Step 0: Compute time since start ---
+    const elapsed = (performance.now() - cameraStartTime) / 1000.0;
+    const t = Math.min(elapsed / introDuration, 1.0); // Normalized 0→1 over introDuration
+
+    // Smooth interpolation (ease-out)
+    const ease = 1 - Math.pow(1 - t, 3); // smooth cubic easing
+
+    // --- Step 1: Compute dynamic height offset ---
+    const currentY = offset.y + (1 - ease) * introHeightBoost;
+    const currentZ = (1 - ease) * introDistanceLag;
+
+    // --- Step 2: Update the orbit angle ---
     cameraOrbitAngle = cameraOrbitAngle + (orbitSpeed * deltaTime);
 
-    // --- Step 1: Compute the orbiting camera position: ---
+    // --- Step 3: Compute the orbiting camera position: ---
     const radius = Math.sqrt(offset.x ** 2 + offset.z ** 2);
     const orbitX = Math.sin(cameraOrbitAngle) * radius;
-    const orbitZ = Math.cos(cameraOrbitAngle) * radius;
-    const newOffset = new THREE.Vector3(orbitX, offset.y, orbitZ);
+    const orbitZ = (Math.cos(cameraOrbitAngle) * radius) + currentZ;
+    const newOffset = new THREE.Vector3(orbitX, currentY, orbitZ);
 
-    // --- Step 2: Compute desired camera position ---
+    // --- Step 4: Compute desired camera position ---
     const desiredOffset = newOffset.clone().applyQuaternion(car.quaternion);
     const desiredPosition = car.position.clone().add(desiredOffset);
 
     if (!isNaN(desiredPosition.x) && !isNaN(desiredPosition.y) && !isNaN(desiredPosition.z)){
-      // --- Step 2: Smoothly move the camera towards that position ---
+      // --- Step 5: Smoothly move the camera towards that position ---
       camera.position.lerp(desiredPosition, 1 - Math.exp(-followStrength * deltaTime));
     }
-    // --- Step 3: Compute look-ahead target ---
+    // --- Step 6: Compute look-ahead target ---
     const lookAtTarget = car.position.clone().add(
       lookAhead.clone().applyQuaternion(car.quaternion)
     );
 
-    // --- Step 4: Smoothly rotate camera towards target (optional rotation lag) ---
+    // --- Step 7: Smoothly rotate camera towards target (optional rotation lag) ---
     const currentDir = new THREE.Vector3();
     camera.getWorldDirection(currentDir);
 
