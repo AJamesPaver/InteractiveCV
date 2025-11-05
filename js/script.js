@@ -1,8 +1,15 @@
+
+let ignoreScroll = false; // Global flag to disable scrollFunction temporarily
+
 // When the user scrolls down 20px from the top of the document, slide down the navbar
 // When the user scrolls to the top of the page, slide up the navbar (50px out of the top view)
-window.onscroll = function() {scrollFunction()};
+window.onscroll = function() {
+  if (!ignoreScroll) scrollFunction();
+};
 
 function scrollFunction() {
+
+    /*
     if (document.body.scrollTop > (screen.height-100) || document.documentElement.scrollTop > (screen.height-100)) {
         // Scrolled one screen height, put away the navbar again
         if (screen.width > 756) {
@@ -20,7 +27,8 @@ function scrollFunction() {
                 }
             }
         }
-    } else if ((document.body.scrollTop == 0) && (document.documentElement.scrollTop == 0)) {
+    } else if ((document.body.scrollTop == 0) && (document.documentElement.scrollTop == 0)) {*/
+    if ((document.body.scrollTop == 0) && (document.documentElement.scrollTop == 0)) {
         // At the top of the screen, hide everything:
         if (!document.getElementById("hamburger-icon").classList.contains('change')){
             // Only hide the navbar icon if the navbar is closed!
@@ -105,6 +113,15 @@ function closeNavBar() {
         // Small screen - set the width to zero
         document.getElementById("navbar").style.width = "0px";
     }
+}
+function navigateAndClose() {
+    ignoreScroll = true;        // Disable scroll-triggered navbar behavior
+    closeNavBar();              // Close it immediately
+
+    // Let the page scroll naturally to the section
+    setTimeout(() => {
+        ignoreScroll = false;     // Re-enable scroll behavior after 800 ms
+    }, 1500);                    // Adjust delay if your scroll animation is slower
 }
 
 // When the user clicks on the button, scroll to the top of the document
